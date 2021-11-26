@@ -6,6 +6,7 @@ import { NotionAPI } from "notion-client";
 import { Collection, CollectionRow, NotionRenderer } from "react-notion-x";
 import { GetStaticProps } from "next";
 import { ExtendedRecordMap } from "notion-types";
+
 const isDev = process.env.NODE_ENV === "development" || !process.env.NODE_ENV;
 
 const notion = new NotionAPI();
