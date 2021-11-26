@@ -1,8 +1,13 @@
 import Head from "next/head";
 import { getPageTitle } from "notion-utils";
 import React, { FC } from "react";
-import { Collection, CollectionRow, NotionRenderer } from "react-notion-x";
-
+import {
+  Collection,
+  CollectionRow,
+  Code,
+  NotionRenderer,
+} from "react-notion-x";
+import Link from "next/link";
 import * as types from "../lib/types";
 import styles from "./styles.module.css";
 import cs from "classnames";
@@ -33,6 +38,30 @@ const NotionPage: FC<types.PageProps> = (props) => {
         darkMode={true}
         rootDomain=""
         components={{
+          pageLink: ({
+            href,
+            as,
+            passHref,
+            prefetch,
+            replace,
+            scroll,
+            shallow,
+            locale,
+            ...props
+          }: any) => (
+            <Link
+              href={href}
+              as={as}
+              passHref={passHref}
+              replace={replace}
+              scroll={scroll}
+              shallow={shallow}
+              locale={locale}
+            >
+              <a {...props} />
+            </Link>
+          ),
+          code: Code,
           collection: Collection,
           collectionRow: CollectionRow,
         }}

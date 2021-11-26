@@ -4,8 +4,9 @@ import Head from "next/head";
 import { getPageTitle, getAllPagesInSpace } from "notion-utils";
 import { NotionAPI } from "notion-client";
 import { Collection, CollectionRow, NotionRenderer } from "react-notion-x";
-import { GetStaticProps } from "next";
+import { GetStaticProps, NextPage } from "next";
 import { ExtendedRecordMap } from "notion-types";
+import NotionPage from "../components/NotionPage";
 
 const isDev = process.env.NODE_ENV === "development" || !process.env.NODE_ENV;
 
@@ -54,31 +55,8 @@ export async function getStaticPaths() {
   };
 }
 
-export default function NotionPage(props: { recordMap: ExtendedRecordMap }) {
-  const { recordMap } = props;
-  if (!recordMap) {
-    return null;
-  }
+const Page: NextPage = (props) => {
+  return <NotionPage {...props} />;
+};
 
-  const title = getPageTitle(recordMap);
-  console.log(title, recordMap);
-
-  return (
-    <>
-      <Head>
-        <meta name="description" content="Mehran portfolio" />
-        <title>{title}</title>
-      </Head>
-      <NotionRenderer
-        recordMap={recordMap}
-        fullPage={true}
-        darkMode={true}
-        rootDomain=""
-        components={{
-          collection: Collection,
-          collectionRow: CollectionRow,
-        }}
-      />
-    </>
-  );
-}
+export default Page;
