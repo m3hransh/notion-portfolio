@@ -1,6 +1,8 @@
 import Head from "next/head";
 import { getPageTitle } from "notion-utils";
 import React, { FC } from "react";
+import Image from "next/image";
+import profilePic from "../public/favicon.ico";
 import {
   Collection,
   CollectionRow,
@@ -11,6 +13,7 @@ import Link from "next/link";
 import * as types from "../lib/types";
 import styles from "./styles.module.css";
 import cs from "classnames";
+import SideBar from "./SideBar";
 
 interface NotionPageProps {
   className?: string;
@@ -31,11 +34,14 @@ const NotionPage: FC<types.PageProps> = (props) => {
         <meta name="description" content="Mehran portfolio" />
         <title>{title}</title>
       </Head>
+      <SideBar />
       <NotionRenderer
         bodyClassName={cs(styles.notion, "index-page")}
         recordMap={recordMap}
         fullPage={true}
         darkMode={true}
+        showTableOfContents={true}
+        minTableOfContentsItems={3}
         rootDomain=""
         components={{
           pageLink: ({
