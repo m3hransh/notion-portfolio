@@ -1,13 +1,15 @@
-.sidebar{
-    position: fixed;
-    top: var(--notion-header-height);
-    left: 0;
-    right: 0;
-    bottom: 0;
+
+
+.profilePhoto {
     display: flex;
-    flex-direction: column;
-    height:100% ;
-    z-index: 200;
-    background-color: rgb(63, 68, 71);
-    width:20rem;
+    justify-content: center;
+}
+
+.name {
+    color: #e25295
+}
+.bio {
+    font-size: 1.2rem;
+    text-align: start;
+    color: var(--fg-color)
 }

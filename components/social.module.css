@@ -1,0 +1,21 @@
+.socialBlock{
+    margin-top: auto;
+    margin-bottom: 2rem;
+}
+.socialList {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  height: 3rem;
+  justify-content: space-evenly;
+}
+
+.socialIcon {
+  width: 3rem;
+  height: 3rem;
+}
+
+.header {
+    font-size: 2rem;
+}
