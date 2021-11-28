@@ -6,16 +6,21 @@ import SocialContacts from "./SocialContacts";
 import styled from "styled-components";
 import { useState } from "react";
 import HamButton from "./HamButton";
+import DarkModeToggle from "./DarkModeToggle";
 
 interface SideBarProps {
   className?: string;
   chidlren?: React.ReactNode;
+  isDarkMode: boolean;
+  toggleDarkMode: () => void;
 }
 
 interface SidePannelProps {
   className?: string;
   chidlren?: React.ReactNode;
   showPannel: boolean;
+  isDarkMode: boolean;
+  toggleDarkMode: () => void;
 }
 
 const SidePannel: FC<SidePannelProps> = (props) => {
@@ -40,6 +45,12 @@ const SidePannel: FC<SidePannelProps> = (props) => {
         </div>
       </div> */}
       <SocialContacts />
+
+      <DarkModeToggle
+        className={styles.darkModeToggle}
+        isDarkMode={props.isDarkMode}
+        toggleDarkMode={props.toggleDarkMode}
+      />
     </div>
   );
 };
@@ -57,18 +68,21 @@ const StyledSidePannel = styled(SidePannel)<SidePannelProps>`
   height: 100%;
   z-index: 200;
   text-align: center;
-  background-color: rgb(63, 68, 71);
+  background-color: var(--bg-color-0);
   padding: 2rem;
   width: 20rem;
   transition: all 0.5s ease-in-out;
 `;
-const SideBar: FC<SideBarProps> = () => {
+const SideBar: FC<SideBarProps> = (props) => {
   const [showPannel, setShowPannel] = useState(true);
-  console.log(showPannel);
   return (
     <>
       <HamButton active={showPannel} setActive={setShowPannel} />
-      <StyledSidePannel showPannel={showPannel} />
+      <StyledSidePannel
+        isDarkMode={props.isDarkMode}
+        toggleDarkMode={props.toggleDarkMode}
+        showPannel={showPannel}
+      />
     </>
   );
 };

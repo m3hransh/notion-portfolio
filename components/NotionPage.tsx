@@ -1,8 +1,6 @@
 import Head from "next/head";
 import { getPageTitle } from "notion-utils";
 import React, { FC } from "react";
-import Image from "next/image";
-import profilePic from "../public/favicon.ico";
 import {
   Collection,
   CollectionRow,
@@ -14,6 +12,8 @@ import * as types from "../lib/types";
 import styles from "./styles.module.css";
 import cs from "classnames";
 import SideBar from "./SideBar";
+import useDarkMode from "use-dark-mode";
+import { Footer } from "./Footer";
 
 interface NotionPageProps {
   className?: string;
@@ -22,25 +22,27 @@ interface NotionPageProps {
 
 const NotionPage: FC<types.PageProps> = (props) => {
   const { recordMap } = props;
+  const darkMode = useDarkMode(false, { classNameDark: "dark-mode" });
   if (!recordMap) {
     return null;
   }
 
   const title = getPageTitle(recordMap);
-  console.log(title, recordMap);
+  // console.log(title, recordMap);
   return (
     <div>
       <Head>
         <meta name="description" content="Mehran portfolio" />
         <title>{title}</title>
       </Head>
-      <SideBar />
+      <SideBar isDarkMode={darkMode.value} toggleDarkMode={darkMode.toggle} />
       <NotionRenderer
         bodyClassName={cs(styles.notion, "index-page")}
         recordMap={recordMap}
         fullPage={true}
-        darkMode={true}
+        darkMode={darkMode.value}
         showTableOfContents={true}
+        showCollectionViewDropdown={false}
         minTableOfContentsItems={3}
         rootDomain=""
         components={{
@@ -71,6 +73,7 @@ const NotionPage: FC<types.PageProps> = (props) => {
           collection: Collection,
           collectionRow: CollectionRow,
         }}
+        footer={<Footer />}
       />
     </div>
   );
