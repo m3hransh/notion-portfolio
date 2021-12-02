@@ -126,7 +126,6 @@ ${mq[3]}{
 /* Fix embedded video's size overflows its container --> */
 
 .notion-gallery-grid {
-  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
   grid-gap: 6vmin;
   gap: 6vmin;
 }
