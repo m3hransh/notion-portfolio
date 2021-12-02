@@ -14,11 +14,15 @@
     "notion-utils": "^4.10.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "react-notion-x": "^4.11.0"
+    "react-icons": "^4.3.1",
+    "react-notion-x": "^4.11.0",
+    "styled-components": "^5.3.3",
+    "use-dark-mode": "^2.3.1"
   },
   "devDependencies": {
     "@types/node": "16.11.9",
     "@types/react": "17.0.36",
+    "@types/styled-components": "^5.1.15",
     "eslint": "7",
     "eslint-config-next": "12.0.4",
     "typescript": "4.5.2"
