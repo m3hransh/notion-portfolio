@@ -24,12 +24,11 @@ export const PageHead: React.FC<types.PageProps> = ({ site }) => {
       {/* TODO: make this dynamic  */}
       <meta
         property="og:image"
-        content={`https://mehranshahidi.ir/ogImage.png`}
+        content="https://mehranshahidi.ir/ogImage.png"
       />
-      <meta property="og:image:width" content="1600" />
-
-      <meta property="og:image:height" content="1600" />
+      <meta property="og:url" content="https://mehranshahidi.ir" />
       <meta name="og:title" content={site?.name} />
+      {/* <!-- Include this to make the og:image larger --> */}
       <meta name="twitter:card" content="summary_large_image" />
       <link rel="shortcut icon" href="/favicon.png" />
 
