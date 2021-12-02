@@ -26,9 +26,9 @@ export const PageHead: React.FC<types.PageProps> = ({ site }) => {
         property="og:image"
         content={`https://mehranshahidi.ir/ogImage.png`}
       />
-      <meta property="og:image:width" content="512" />
+      <meta property="og:image:width" content="1600" />
 
-      <meta property="og:image:height" content="512" />
+      <meta property="og:image:height" content="1600" />
       <meta name="og:title" content={site?.name} />
       <meta name="twitter:card" content="summary_large_image" />
       <link rel="shortcut icon" href="/favicon.png" />
