@@ -1,5 +1,6 @@
-import React, { FC, useState } from "react";
+import React, { FC } from "react";
 import styled from "styled-components";
+import { AiOutlineMenu, AiOutlineMenuUnfold } from "react-icons/ai";
 
 interface HamButtonProps {
   className?: string;
@@ -7,70 +8,62 @@ interface HamButtonProps {
   active: boolean;
   setActive: (v: boolean) => void;
 }
-const Burger = styled.label`
-  background-color: #b6edc8;
-  position: fixed;
-  top: 6rem;
-  right: 6rem;
-  border-radius: 50%;
-  height: 7rem;
-  width: 7rem;
-  cursor: pointer;
+
+const Icon = styled(AiOutlineMenu)<{ open: boolean }>`
+  width: 100%;
+  height: 100%;
+  padding: 0.5rem;
+  grid-column: 1;
+  grid-row: 1;
   z-index: 1000;
-  box-shadow: 0 1rem 3rem rgba(182, 237, 200, 0.3);
-  text-align: center;
+  transition: all 0.3s ease-in-out;
+  color: ${({ theme }) =>
+    theme.darkMode?.value ? theme.dark.primary : theme.light.primary};
+  opacity: ${(props) => (props.open ? "0" : "100%")};
+`;
+const IconRound = styled(AiOutlineMenuUnfold)<{ open: boolean }>`
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  padding: 0.5rem;
+  grid-column: 1;
+  grid-row: 1;
+  color: ${({ theme }) =>
+    theme.darkMode.value ? theme.dark.primary : theme.light.primary};
+  transition: all 0.3s ease-in-out;
+  opacity: ${(props) => (props.open ? "100%" : "0")};
 `;
 
-const Icon = styled.span<{ clicked: boolean }>`
-  position: relative;
-  background-color: ${(props) => (props.clicked ? "transparent" : "black")};
-  width: 3rem;
-  height: 2px;
-  display: inline-block;
-  margin-top: 3.5rem;
-  transition: all 0.3s;
-
-  &::before,
-  &::after {
-    content: "";
-    background-color: black;
-    width: 3rem;
-    height: 2px;
-    display: inline-block;
-    position: absolute;
-    left: 0;
-    transition: all 0 0.3s;
-  }
-  &::before {
-    top: ${(props) => (props.clicked ? "0" : "-0.8rem")};
-    transform: ${(props) => (props.clicked ? "rotate(135deg)" : "rotate(0)")};
-  }
-  &::after {
-    top: ${(props) => (props.clicked ? "0" : "0.8rem")};
-    transform: ${(props) => (props.clicked ? "rotate(-135deg)" : "rotate(0)")};
+const Menu = styled.label<{ open: boolean }>`
+  position: fixed;
+  display: grid;
+  justify-content: center;
+  top: 0rem;
+  left: 0rem;
+  height: var(--notion-header-height);
+  cursor: pointer;
+  z-index: 900;
+  /* box-shadow: 0 1rem 3rem rgb(255 255 255 / 30%); */
+  transition: all 0.2s ease-in;
+  text-align: center;
+  &:hover {
+    ${Icon}, ${IconRound} {
+      color: ${({ theme }) =>
+        theme.darkMode.value ? theme.dark.secondary : theme.light.secondary};
+      transform: scale(1.1);
+    }
   }
 `;
 const HamButton: FC<HamButtonProps> = ({ className, active, setActive }) => {
   const handleClick = () => setActive(!active);
   return (
-    <Burger onClick={handleClick} htmlFor="navi-toggle">
-      <Icon clicked={active}>&nbsp;</Icon>
-    </Burger>
+    <>
+      <Menu open={active} onClick={handleClick} htmlFor="navi-toggle">
+        <Icon open={active} />
+        <IconRound open={active} />
+      </Menu>
+    </>
   );
 };
-const styledHamButton = styled(HamButton)<HamButtonProps>`
-  height: var(--notion-header-height);
-  width: var(--notion-header-height);
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 300;
-  background-color: "#fff";
-  cursor: pointer;
-  tranition: all 0.5s ease-in-out;
-  border: 3px solid #fff;
-`;
 
-export default styledHamButton;
+export default HamButton;

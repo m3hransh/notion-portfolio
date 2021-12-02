@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { getPageTitle } from "notion-utils";
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import {
   Collection,
   CollectionRow,
@@ -12,8 +12,11 @@ import * as types from "../lib/types";
 import styles from "./styles.module.css";
 import cs from "classnames";
 import SideBar from "./SideBar";
-import useDarkMode from "use-dark-mode";
 import { Footer } from "./Footer";
+import HamButton from "./HamButton";
+import { PageHead } from "./PageHead";
+import { useContext } from "react";
+import { ThemeContext } from "styled-components";
 
 interface NotionPageProps {
   className?: string;
@@ -22,22 +25,24 @@ interface NotionPageProps {
 
 const NotionPage: FC<types.PageProps> = (props) => {
   const { recordMap } = props;
-  const darkMode = useDarkMode(false, { classNameDark: "dark-mode" });
+  const { darkMode } = useContext(ThemeContext);
+  const [showPannel, setShowPannel] = useState(true);
   if (!recordMap) {
     return null;
   }
-
   const title = getPageTitle(recordMap);
-  // console.log(title, recordMap);
   return (
     <div>
+      <PageHead site={props.site} />
       <Head>
         <meta name="description" content="Mehran portfolio" />
         <title>{title}</title>
       </Head>
-      <SideBar isDarkMode={darkMode.value} toggleDarkMode={darkMode.toggle} />
+      <HamButton active={showPannel} setActive={setShowPannel} />
+      {/* <Navigation active={showPannel} /> */}
+      <SideBar active={showPannel} />
       <NotionRenderer
-        bodyClassName={cs(styles.notion, "index-page")}
+        bodyClassName={cs("index-page")}
         recordMap={recordMap}
         fullPage={true}
         darkMode={darkMode.value}

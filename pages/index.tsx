@@ -2,15 +2,15 @@ import type { GetStaticProps, NextPage } from "next";
 import resolveNotionPage from "../lib/resolve-notion-page";
 import { ExtendedRecordMap } from "notion-types";
 import NotionPage from "../components/NotionPage";
+import { domain } from "../site.config";
+import * as types from "../lib/types";
 
 export const getStaticProps: GetStaticProps = async (context) => {
   // the default resolveNotionPage is root
-  const recordMap: ExtendedRecordMap = await resolveNotionPage();
+  const props: types.PageProps = await resolveNotionPage(domain);
 
   return {
-    props: {
-      recordMap,
-    },
+    props,
     revalidate: 10,
   };
 };

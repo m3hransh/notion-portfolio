@@ -1,6 +1,6 @@
 import React, { FC } from "react";
-import styles from "./styles.module.css";
 import { IoSunnyOutline, IoMoonSharp } from "react-icons/io5";
+import styled from "styled-components";
 
 interface DarkModeToggleProps {
   className?: string;
@@ -29,18 +29,25 @@ const DarkModeToggle: FC<DarkModeToggleProps> = ({
   return (
     <div className={className}>
       {hasMounted ? (
-        <div className={styles.settings}>
-          <a
-            className={styles.toggleDarkMode}
-            onClick={toggleDarkModeCb}
-            title="Toggle dark mode"
-          >
+        <Toggle>
+          <a onClick={toggleDarkModeCb} title="Toggle dark mode">
             {isDarkMode ? <IoMoonSharp /> : <IoSunnyOutline />}
           </a>
-        </div>
+        </Toggle>
       ) : null}
     </div>
   );
 };
 
+const Toggle = styled.div`
+  font-size: 2em;
+  transition: all 0.2s ease-out;
+  color: ${({ theme }) =>
+    theme.darkMode.value ? theme.dark.primary : theme.light.primary};
+  &:hover {
+    color: ${({ theme }) =>
+      theme.darkMode.value ? theme.dark.secondary : theme.light.secondary};
+    transform: scale(1.2);
+  }
+`;
 export default DarkModeToggle;

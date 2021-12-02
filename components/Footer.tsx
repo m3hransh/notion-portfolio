@@ -1,12 +1,11 @@
 import * as React from "react";
-import styles from "./styles.module.css";
 // import * as config from 'lib/config'
 
 // TODO: merge the data and icons from PageSocial with the social links in Footer
 
 export const Footer: React.FC = () => {
   return (
-    <footer className={styles.footer}>
+    <footer>
       {/* <div className={styles.copyright}>Copyright 2021 {config.author}</div> */}
 
       {/* 
