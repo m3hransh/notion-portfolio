@@ -12,7 +12,7 @@ module.exports = {
   author: 'MohammadMehran Shahidi',
 
   // open graph metadata (optional)
-  description: 'Hello, I am Mehran Shahidi. This is my personal website!',
+  description: 'Hello, I am Mehran Shahidi, and this is my website!',
   socialImageTitle: 'Mehran Sh',
   socialImageSubtitle: 'Hello World! 👋',
 

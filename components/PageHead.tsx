@@ -21,6 +21,15 @@ export const PageHead: React.FC<types.PageProps> = ({ site }) => {
 
       <meta name="theme-color" content="#EB625A" />
       <meta property="og:type" content="website" />
+      <meta
+        property="og:image"
+        content={`${site?.domain}/android-chrome-512x512.png`}
+      />
+      <meta property="og:image:width" content="512" />
+
+      <meta property="og:image:height" content="512" />
+      <meta name="og:title" content={site?.name} />
+      <meta name="twitter:card" content="summary_large_image" />
       <link rel="shortcut icon" href="/favicon.png" />
 
       <link
