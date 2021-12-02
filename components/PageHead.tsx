@@ -24,7 +24,7 @@ export const PageHead: React.FC<types.PageProps> = ({ site }) => {
       {/* TODO: make this dynamic  */}
       <meta
         property="og:image"
-        content={`https://mehranshahidi.ir/android-chrome-512x512.png`}
+        content={`https://mehranshahidi.ir/ogImage.png`}
       />
       <meta property="og:image:width" content="512" />
 
