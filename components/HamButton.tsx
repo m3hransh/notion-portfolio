@@ -9,6 +9,27 @@ interface HamButtonProps {
   setActive: (v: boolean) => void;
 }
 
+const HamButton: FC<HamButtonProps> = ({ active, setActive }) => {
+  const [hasMounted, setHasMounted] = React.useState(false);
+
+  const handleClick = () => setActive(!active);
+  // making sure the component doesn't prerender
+  React.useEffect(() => {
+    setHasMounted(true);
+  }, []);
+
+  return (
+    <>
+      {hasMounted ? (
+        <Menu open={active} onClick={handleClick} htmlFor="navi-toggle">
+          <Icon open={active} />
+          <IconRound open={active} />
+        </Menu>
+      ) : null}
+    </>
+  );
+};
+
 const Icon = styled(AiOutlineMenu)<{ open: boolean }>`
   width: 100%;
   height: 100%;
@@ -21,6 +42,7 @@ const Icon = styled(AiOutlineMenu)<{ open: boolean }>`
     theme.darkMode?.value ? theme.dark.primary : theme.light.primary};
   opacity: ${(props) => (props.open ? "0" : "100%")};
 `;
+
 const IconRound = styled(AiOutlineMenuUnfold)<{ open: boolean }>`
   width: 100%;
   height: 100%;
@@ -43,7 +65,6 @@ const Menu = styled.label<{ open: boolean }>`
   height: var(--notion-header-height);
   cursor: pointer;
   z-index: 900;
-  /* box-shadow: 0 1rem 3rem rgb(255 255 255 / 30%); */
   transition: all 0.2s ease-in;
   text-align: center;
   &:hover {
@@ -54,16 +75,5 @@ const Menu = styled.label<{ open: boolean }>`
     }
   }
 `;
-const HamButton: FC<HamButtonProps> = ({ className, active, setActive }) => {
-  const handleClick = () => setActive(!active);
-  return (
-    <>
-      <Menu open={active} onClick={handleClick} htmlFor="navi-toggle">
-        <Icon open={active} />
-        <IconRound open={active} />
-      </Menu>
-    </>
-  );
-};
 
 export default HamButton;

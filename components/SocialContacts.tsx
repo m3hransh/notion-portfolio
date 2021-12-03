@@ -13,6 +13,28 @@ interface SocialContactsProps {
   className?: string;
   chidlren?: React.ReactNode;
 }
+const SocialContacts: FC<SocialContactsProps> = () => {
+  return (
+    <SocialBlock>
+      <Head2>Contacts</Head2>
+      <SocialList>
+        <SocialIcon target="_blank" rel="noreferrer" href={YouTubeLink}>
+          <FaYoutube style={{ height: "100%", width: "100%" }} />
+        </SocialIcon>
+        <SocialIcon target="_blank" rel="noreferrer" href={GitHubLink}>
+          <FaGithub style={{ height: "100%", width: "100%" }} />
+        </SocialIcon>
+        <SocialIcon target="_blank" rel="noreferrer" href={LinkedIn}>
+          <FaLinkedinIn style={{ height: "100%", width: "100%" }} />
+        </SocialIcon>
+        <SocialIcon target="_blank" rel="noreferrer" href={TwitterLink}>
+          <FaTwitter style={{ height: "100%", width: "100%" }} />
+        </SocialIcon>
+      </SocialList>
+    </SocialBlock>
+  );
+};
+
 const SocialBlock = styled.div`
   margin-top: auto;
   margin-bottom: 2rem;
@@ -45,26 +67,5 @@ const Head2 = styled.h2`
   color: ${({ theme }) =>
     theme.darkMode.value ? theme.dark.primary : theme.light.primary};
 `;
-const SocialContacts: FC<SocialContactsProps> = () => {
-  return (
-    <SocialBlock>
-      <Head2>Contacts</Head2>
-      <SocialList>
-        <SocialIcon target="_blank" rel="noreferrer" href={YouTubeLink}>
-          <FaYoutube style={{ height: "100%", width: "100%" }} />
-        </SocialIcon>
-        <SocialIcon target="_blank" rel="noreferrer" href={GitHubLink}>
-          <FaGithub style={{ height: "100%", width: "100%" }} />
-        </SocialIcon>
-        <SocialIcon target="_blank" rel="noreferrer" href={LinkedIn}>
-          <FaLinkedinIn style={{ height: "100%", width: "100%" }} />
-        </SocialIcon>
-        <SocialIcon target="_blank" rel="noreferrer" href={TwitterLink}>
-          <FaTwitter style={{ height: "100%", width: "100%" }} />
-        </SocialIcon>
-      </SocialList>
-    </SocialBlock>
-  );
-};
 
 export default SocialContacts;

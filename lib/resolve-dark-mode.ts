@@ -33,4 +33,5 @@ export function resolveDarkMode() {
     const isDarkMode = document.body.classList.contains(classNameDark);
     localStorage.setItem(storageKey, JSON.stringify(isDarkMode));
   }
+  return document.body.classList.contains(classNameDark);
 }

@@ -40,7 +40,7 @@ const NotionPage: FC<types.PageProps> = (props) => {
       </Head>
       <HamButton active={showPannel} setActive={setShowPannel} />
       {/* <Navigation active={showPannel} /> */}
-      <SideBar active={showPannel} />
+      <SideBar isDarkMode={darkMode.value} active={showPannel} />
       <NotionRenderer
         bodyClassName={cs("index-page")}
         recordMap={recordMap}

@@ -9,6 +9,7 @@ interface SideBarProps {
   className?: string;
   chidlren?: React.ReactNode;
   active: boolean;
+  isDarkMode: boolean;
 }
 
 interface SidePannelProps {
@@ -16,6 +17,34 @@ interface SidePannelProps {
   chidlren?: React.ReactNode;
   showPannel: boolean;
 }
+const SideBar: FC<SideBarProps> = (props) => {
+  // This is for fixing the darkMode effect
+  // gives a delay to get the right context
+  const [hasMounted, setHasMounted] = React.useState(false);
+  React.useEffect(() => {
+    setHasMounted(true);
+  }, []);
+  const { darkMode } = useContext(ThemeContext);
+
+  return (
+    <>
+      {hasMounted ? (
+        <SidePannel showPannel={props.active}>
+          <ProfilePhoto>
+            <Image src={profilePic} alt="profile" width={150} height={150} />
+          </ProfilePhoto>
+          <Name>Mehran Shahidi</Name>
+          <SocialContacts />
+          <DarkModeToggle
+            isDarkMode={darkMode.value}
+            toggleDarkMode={darkMode.toggle}
+          />
+        </SidePannel>
+      ) : null}
+    </>
+  );
+};
+
 const ProfilePhoto = styled.div`
   display: flex;
   justify-content: center;
@@ -23,25 +52,7 @@ const ProfilePhoto = styled.div`
 const Name = styled.h2`
   color: var(--fg-color);
 `;
-const SidePannel: FC<SidePannelProps> = (props) => {
-  const { darkMode } = useContext(ThemeContext);
-  return (
-    <div className={props.className}>
-      <ProfilePhoto>
-        <Image src={profilePic} alt="profile" width={150} height={150} />
-      </ProfilePhoto>
-      <Name>Mehran Shahidi</Name>
-      <SocialContacts />
-
-      <DarkModeToggle
-        isDarkMode={darkMode.value}
-        toggleDarkMode={darkMode.toggle}
-      />
-    </div>
-  );
-};
-
-const StyledSidePannel = styled(SidePannel)<SidePannelProps>`
+const SidePannel = styled.div<{ showPannel: boolean }>`
   position: fixed;
   top: 0;
   left: ${(props) => (props.showPannel ? "0" : "-20rem")};
@@ -66,12 +77,5 @@ const StyledSidePannel = styled(SidePannel)<SidePannelProps>`
     display: flex;
   }
 `;
-const SideBar: FC<SideBarProps> = (props) => {
-  return (
-    <>
-      <StyledSidePannel showPannel={props.active} />
-    </>
-  );
-};
 
 export default SideBar;
